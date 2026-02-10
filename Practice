@@ -1,0 +1,167 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+// ------------------ MyApp ------------------
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'ESIH App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const EkranA(),
+    );
+  }
+}
+
+// ------------------ Ekran A ak Drawer ------------------
+class EkranA extends StatelessWidget {
+  const EkranA({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ekran A"),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text(
+                "Meni Navige",
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text("Ekran B"),
+              onTap: () {
+                Navigator.pop(context); // fèmen drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EkranB()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text("Ekran C"),
+              onTap: () {
+                Navigator.pop(context); // fèmen drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EkranC()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      body: const Center(
+        child: Text(
+          "Ou nan Ekran A\nLouvri meni a gòch pou ale nan B oswa C",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
+
+// ------------------ Ekran B ------------------
+class EkranB extends StatelessWidget {
+  const EkranB({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ekran B"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.home,
+              size: 80,
+              color: Colors.blue,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Ou nan Ekran B!",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context); // retounen nan A
+              },
+              child: const Text("Retounen nan Ekran A"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ------------------ Ekran C ------------------
+class EkranC extends StatelessWidget {
+  const EkranC({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ekran C"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.person,
+              size: 80,
+              color: Colors.green,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Ou nan Ekran C!",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context); // retounen nan A
+              },
+              child: const Text("Retounen nan Ekran A"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
